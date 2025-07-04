@@ -19,6 +19,32 @@ curl -sSL https://raw.githubusercontent.com/mvasilyev/dumbproxy-quickstart/main/
 - Создаёт и настраивает systemd-сервис для автоматического запуска прокси.
 - Запускает сервис и выводит параметры подключения.
 
+## Быстрый старт (Docker)
+Для запуска через Docker используйте скрипт:
+
+```sh
+curl -sSL https://raw.githubusercontent.com/mvasilyev/dumbproxy-quickstart/main/setup-dumbproxy-docker.sh | sudo bash
+```
+
+## Что делает docker-скрипт
+
+- Запрашивает у вас порт, логин и пароль для прокси.
+- Проверяет наличие Docker и устанавливает его при необходимости (только для Linux).
+- Скачивает официальный образ dumbproxy.
+- Запускает контейнер с вашими параметрами (порт, логин, пароль).
+- Контейнер автоматически перезапускается при сбоях или перезагрузке.
+
+## Требования (Docker)
+
+- Linux (x86_64) с поддержкой Docker Engine
+- Права root (sudo)
+
+## Примеры команд управления контейнером
+
+- Просмотр логов: `docker logs -f dumbproxy`
+- Остановить: `docker stop dumbproxy`
+- Удалить: `docker rm dumbproxy`
+
 ## Требования
 
 - Linux (x86_64)
