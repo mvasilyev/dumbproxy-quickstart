@@ -28,9 +28,13 @@ apt-get install -y curl jq
 # 3. Скачиваем последний релиз
 echo "Определяем последнюю версию dumbproxy..."
 LATEST_JSON=$(curl -sSL https://api.github.com/repos/SenseUnit/dumbproxy/releases/latest)
-DOWNLOAD_URL=$(echo "$LATEST_JSON" | jq -r '.assets[] | select(.name|test("linux_amd64$")) .browser_download_url')
+
+# ищем имя с дефисом linux-amd64
+DOWNLOAD_URL=$(echo "$LATEST_JSON" | jq -r \
+  '.assets[] | select(.name|test("linux-amd64$")) .browser_download_url')
+
 if [[ -z "$DOWNLOAD_URL" ]]; then
-  echo "Не удалось найти бинарник для linux_amd64." >&2
+  echo "Не удалось найти бинарник для linux-amd64." >&2
   exit 1
 fi
 
